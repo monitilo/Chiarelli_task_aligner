@@ -1,4 +1,4 @@
-# Aligner Wrapper Project
+# Aligner Wrapper Project - Chiarelli German
 
 This repository contains a Dockerized Python wrapper around `bwa mem` for NGS read alignment, along with automated tests and reporting.
 
