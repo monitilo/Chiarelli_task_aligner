@@ -32,13 +32,13 @@ python aligner.py \
 ### input Argument
 
 Argument	Description
--r1, --read1	Path to Read 1 FASTQ.gz file (required)
--r2, --read2	Path to Read 2 FASTQ.gz file (optional)
--f, --reference	Reference genome FASTA (must be pre-indexed with bwa index)
--o, --output_dir	Output directory (created if it doesn't exist)
--t, --threads	Number of threads to use (default: 4)
---stats	Optional file to store stats report (default: results.txt)
---keep_intermediates	yes or no. Whether to retain SAM/BAM intermediates (default: no)
+- -r1, --read1	Path to Read 1 FASTQ.gz file (required)
+- -r2, --read2	Path to Read 2 FASTQ.gz file (optional)
+- -f, --reference	Reference genome FASTA (must be pre-indexed with bwa index)
+- -o, --output_dir	Output directory (created if it doesn't exist)
+- -t, --threads	Number of threads to use (default: 4)
+- --stats	Optional file to store stats report (default: results.txt)
+- --keep_intermediates	yes or no. Whether to retain SAM/BAM intermediates (default: no)
 
 
 #### output
