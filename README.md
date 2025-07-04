@@ -127,7 +127,7 @@ Large hg38 file is split into parts (≤2GB each) for storage and version contro
 
 A dedicated merge script is included that automatically recombines these parts before running tests or analysis.
 
-Docker & End-to-End Testing
+# Docker End-to-End
 The Docker image is built to support end-to-end workflows, including:
 
 Automatic merging of reference genome parts on container start or test initialization.
@@ -136,9 +136,9 @@ Running full alignment tests with the complete hg38 reference seamlessly.
 
 This setup ensures reproducibility while respecting file size constraints imposed by GitHub.
 
-# Docker Instructions
+## Docker Instructions
 
-## Build the Docker image:
+### Build the Docker image:
 To create the Docker image, run:
 
 docker build -t chiarelli-aligner:latest .
@@ -146,7 +146,7 @@ docker build -t chiarelli-aligner:latest .
 This command builds the image and copies the repository's file structure into the container.
 
 
-## Run container interactively :
+### Run container interactively :
 
 To explore and use the scripts and test data interactively, run:
 
@@ -154,7 +154,7 @@ docker run --rm -it chiarelli-aligner:latest
 
 This will start a shell session inside the container, with the directory structure mirroring the repository.
 
-## Run the aligner in a container:
+### Run the aligner in a container:
 To verify that the aligner works and shows the help message:
 
 docker run --rm chiarelli-aligner:latest python aligner.py --help
@@ -163,7 +163,7 @@ Run example to generate the files in ./output directory
 
 docker run --rm -v "./output:/app/output" chiarelli-aligner:latest python aligner.py --read1 test_cases/test_case_1_R1.fastq.gz --read2 test_cases/test_case_1_R2.fastq.gz --reference test_cases/reference_genome/chr21/chr21.fa.gz --output_dir output --threads 4 --stats example.txt
 
-## Run tests and generate report:
+### Run tests and generate report:
 
 To execute the test suite and generate a Markdown report, mount the output folder from your local system:
 
@@ -200,4 +200,17 @@ pysam==0.23.3 — For working with SAM/BAM files
 pytest==8.4.1 — For automated testing
 
 Note: All dependencies are pre-installed in the provided Docker image. No additional setup is needed when using Docker.
+
+
+# Extra comment from the creator:
+This note was originally intended for Emily, but since she's currently on holiday, I wanted to share it directly here in case it's useful for the technical team:
+
+One key point I'd like to highlight:
+As mentioned above, some of the test requirements involved using the full hg38 human reference genome, which is quite large (~6 GB when indexed). Since the task instructions emphasized that everything should run end-to-end inside Docker, I interpreted this to mean that the genome should be included in the container. To make that feasible within GitHub’s file size constraints, I split the larger files and implemented an automatic merging step at runtime.
+
+That said, in a real-world production scenario, I would expect such reference data to be handled as external input, not bundled into the container or repository. If I misunderstood the intent behind "end-to-end," I’m happy to revisit that design assumption.
+
+A small additional note: I'm working from a Windows machine, and my Git configuration was not fully set up for credential caching. This meant that I had to manually enter a token for every push. As a result, I chose to push most of the work in one go, rather than progressively. Just wanted to provide that context in case the Git history seems unusual.
+
+-German Chiarelli
 
