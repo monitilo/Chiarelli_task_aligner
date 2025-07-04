@@ -159,6 +159,9 @@ To verify that the aligner works and shows the help message:
 
 docker run --rm chiarelli-aligner:latest python aligner.py --help
 
+Run example to generate the files in ./output directory 
+
+docker run --rm -v "./output:/app/output" chiarelli-aligner:latest python aligner.py --read1 test_cases/test_case_1_R1.fastq.gz --read2 test_cases/test_case_1_R2.fastq.gz --reference test_cases/reference_genome/chr21/chr21.fa.gz --output_dir output --threads 4 --stats example.txt
 
 ## Run tests and generate report:
 

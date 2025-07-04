@@ -24,7 +24,7 @@ def parse_args():
     parser.add_argument("-r1","--read1", required=True, help="Path to Read 1 FASTQ file (required)")
     parser.add_argument("-r2","--read2", default="", help="Path to Read 2 FASTQ file (optional for paired-end)")
     parser.add_argument("-f","--reference", required=True, help="Path to reference genome FASTA file")
-    parser.add_argument("-o","--output_dir", default="results", help="Directory to save output files")
+    parser.add_argument("-o","--output_dir", default="output", help="Directory to save output files")
     parser.add_argument("-t","--threads", type=int, default=4, help="Number of threads to use (default: 4)")
     parser.add_argument("--stats", default=None, help="Stats report filename or path")
     parser.add_argument("--keep_intermediates", type=str, choices=["yes", "no"], default="no", help="Keep intermediate SAM/BAM files (yes/no)")
