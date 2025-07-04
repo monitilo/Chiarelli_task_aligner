@@ -50,6 +50,7 @@ results.txt with alignment stats and CPU/memory usage
 Optional Intermediate files (SAM, sorted BAM) if --keep_intermediates yes
 
 
+
 ### Running the pytests, test_aligner.py
 
 pytest test_aligner.py
@@ -120,8 +121,20 @@ Tests use a mix of:
 
 - chr21 & chr22 only — faster test cycles
 
-Including the full hg38 reference in the repository adds significant bulk.
-For real-world use, it’s better to treat the reference genome as external input, rather than bundling it with the codebase.
+Including the full hg38 reference directly in the repository adds significant bulk, which can exceed GitHub’s file size limits. To address this:
+
+Large hg38 file is split into parts (≤2GB each) for storage and version control.
+
+A dedicated merge script is included that automatically recombines these parts before running tests or analysis.
+
+Docker & End-to-End Testing
+The Docker image is built to support end-to-end workflows, including:
+
+Automatic merging of reference genome parts on container start or test initialization.
+
+Running full alignment tests with the complete hg38 reference seamlessly.
+
+This setup ensures reproducibility while respecting file size constraints imposed by GitHub.
 
 # Docker Instructions
 
